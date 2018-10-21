@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import Vue from "vue";
 import Maps from "@/components/Maps";
 import Merchant from "@/components/Merchant";
 import MerchantList from "@/components/MerchantList";
@@ -70,7 +71,7 @@ export default {
         { mode: "cors" }
       );
       const data = await res.json();
-      this.merchants = data.merchants;
+      Vue.set(this, "merchants", data.merchants);
     }
   },
 

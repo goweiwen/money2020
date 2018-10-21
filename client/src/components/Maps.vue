@@ -77,6 +77,9 @@ export default {
       if (google === null) {
         return;
       }
+    },
+    deselectMerchant() {
+      this.$emit("select", null);
     }
   }
 };
