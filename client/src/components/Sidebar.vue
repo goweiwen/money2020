@@ -5,9 +5,7 @@
       li
         router-link(to="/" @click.native="click") Home
       li
-        router-link(to="/about" @click.native="click") About
-      li
-        a(@click="confirmLogout" @click.native="click") Log Out
+        a(@click="notify" @click.native="click") Notify in 10 seconds
 </template>
 
 <script>
@@ -18,18 +16,15 @@ export default {
     click() {
       this.$emit("route");
     },
-    confirmLogout() {
-      this.$dialog.confirm({
-        title: "Logging out",
-        message: "Are you sure you want to log out?",
-        cancelText: "Cancel",
-        confirmText: "Log Out",
-        type: "is-danger",
-        hasIcon: true,
-        onConfirm: this.logout
+    notify() {
+      Notification.requestPermission(permission => {
+        if (permission === "granted") {
+          setTimeout(function() {
+            new Notification("Hey Thomas, choo choo");
+          }, 10000);
+        }
       });
-    },
-    logout() {}
+    }
   }
 };
 </script>
