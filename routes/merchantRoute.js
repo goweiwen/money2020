@@ -17,7 +17,7 @@ var yelpMiddleware = function (req, res, next) {
 	var lon = req.query.lon
 	var term = req.purchaseStats.nextLikelyPurchase
 	yelpAPI.getNearbyBusinesses(term, lat, lon).then(function(bizData) {
-
+		res.send(bizData)
 	})
 }
 
