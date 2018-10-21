@@ -3,7 +3,7 @@
       ref="mapRef"
       @click="deselectMerchant"
       :center="position"
-      :zoom="10.5"
+      :zoom="6"
       map-type-id="terrain")
 
       DirectionsRenderer(
