@@ -19,8 +19,8 @@ export default {
 <style lang="stylus" scoped>
 .merchant-list {
   position: absolute;
-  top: 50%;
-  height: 50%;
+  top: 70%;
+  height: 30%;
   width: 100%;
   padding: 1em 0;
 
