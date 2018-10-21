@@ -15,8 +15,8 @@ async function getToken() {
                 client_secret: CONSUMER_SECRET,
                 grant_type: GRANT_TYPE
             }
-        }, function (err, httpResposnse, body) {
-            accessToken = JSON.parse(body).access_token
+        }, function (err, httpResponse, body) {
+            let accessToken = JSON.parse(body).access_token
             resolve(accessToken)
         }, reject)
     })
