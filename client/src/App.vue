@@ -25,6 +25,16 @@ export default {
 
 <style lang="stylus">
 w = 200px;
+h = 3.25rem;
+
+html {
+  overflow: auto;
+}
+
+#main {
+  width: 100%;
+  height: 'calc(100vh - %s)' % h;
+}
 
 .has-navbar-fixed-top {
   padding-top: 3.25rem;
@@ -33,6 +43,7 @@ w = 200px;
 #toolbar {
   z-index: 2;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
 
   .navbar-burger {
     margin-left: 0;
@@ -41,7 +52,7 @@ w = 200px;
 
 #sidebar {
   position: absolute;
-  width: 100vw;
+  width: 100%;
   z-index: 1;
   padding: 16px;
   overflow: hidden;
@@ -66,5 +77,13 @@ w = 200px;
   #main {
     margin-left: w;
   }
+}
+
+.slide-down-enter-active, .slide-down-leave-active {
+  transition: top 0.5s ease;
+}
+
+.slide-down-enter, .slide-down-leave-to {
+  top: 100% !important;
 }
 </style>

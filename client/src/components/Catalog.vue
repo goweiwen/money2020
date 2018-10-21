@@ -1,0 +1,6 @@
+<template lang="pug">
+    ul
+        li 1
+        li 2
+        li 3
+</template>

@@ -16,22 +16,21 @@ export default {
 
   methods: {
     click() {
-      this.$emit('route')
+      this.$emit("route");
     },
     confirmLogout() {
       this.$dialog.confirm({
-        title: 'Logging out',
-        message: 'Are you sure you want to log out?',
-        cancelText: 'Cancel',
-        confirmText: 'Log Out',
-        type: 'is-danger',
+        title: "Logging out",
+        message: "Are you sure you want to log out?",
+        cancelText: "Cancel",
+        confirmText: "Log Out",
+        type: "is-danger",
         hasIcon: true,
-        onConfirm: this.logout,
-      })
+        onConfirm: this.logout
+      });
     },
-    logout() {
-    },
-  },
+    logout() {}
+  }
 };
 </script>
 
