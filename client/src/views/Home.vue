@@ -9,13 +9,17 @@
     transition(name="slide-down")
       MerchantList.merchants(
         v-if="merchant == null"
-        :merchants="merchants")
+        :item="item"
+        :merchants="merchants"
+        @select="selectMerchant")
 
       Merchant.merchant(
         v-for="(_, i) in merchants"
         v-if="merchant == i"
         :key="i"
-        :merchant="merchants[i]")
+        :merchant="merchants[i]"
+        @directions="getDirections"
+        @route="getDirections")
 </template>
 
 <script>
@@ -39,25 +43,14 @@ export default {
     return {
       position,
       destination: null,
-      merchants: [
-        {
-          name: "Walmart",
-          position: fuzzPosition(position, 0.01)
-        },
-        {
-          name: "Lowes",
-          position: fuzzPosition(position, 0.01)
-        },
-        {
-          name: "JCPenny",
-          position: fuzzPosition(position, 0.01)
-        }
-      ],
-      merchant: null
+      directions: { routes: [] },
+      merchants: [],
+      merchant: null,
+      item: "TV Tables & Stands"
     };
   },
 
-  mounted() {
+  async mounted() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(pos => {
         this.position = {
@@ -69,12 +62,38 @@ export default {
           merchant.position = fuzzPosition(this.position, 0.01);
         });
       });
+
+      const res = await fetch(
+        `https://bmkc.herokuapp.com/merchant?lat=${this.position.lat}&lon=${
+          this.position.lng
+        }`,
+        { mode: "cors" }
+      );
+      const data = await res.json();
+      this.merchants = data.merchants;
     }
   },
 
   methods: {
     selectMerchant(i) {
       this.merchant = i;
+      this.directions = { routes: [] };
+    },
+    getDirections() {
+      const merchant = this.merchants[this.merchant];
+      const directionService = new google.maps.DirectionsService();
+      directionService.route(
+        {
+          origin: this.position,
+          destination: merchant.position,
+          travelMode: "WALKING"
+        },
+        (directions, status) => {
+          if (status == "OK") {
+            this.directions = directions;
+          }
+        }
+      );
     }
   }
 };
@@ -86,8 +105,9 @@ export default {
 }
 
 .maps {
+  top: -50%;
   width: 100%;
-  height: 100%;
+  height: 150%;
 }
 
 .merchant, .merchants {
@@ -97,7 +117,6 @@ export default {
   height: 50%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background: #fff;
-  padding: 1em;
   border-radius: 15px 15px 0 0;
 }
 </style>

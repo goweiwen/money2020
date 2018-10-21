@@ -22,7 +22,7 @@ export default MapElementFactory({
     routeIndex: { type: Number },
     options: { type: Object },
     panel: {},
-    directions: { type: Array }
+    directions: { type: Object }
     //// If you have a property that comes with a `_changed` event,
     //// you can specify `twoWay` to automatically bind the event, e.g. Map's `zoom`:
     // zoom: {type: Number, twoWay: true}

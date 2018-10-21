@@ -1,6 +1,7 @@
 <template lang="pug">
     GmapMap.map(
       ref="mapRef"
+      @click="deselectMerchant"
       :center="position"
       :zoom="15"
       map-type-id="terrain")
@@ -33,8 +34,7 @@ export default {
 
   data() {
     return {
-      position: { lat: 0, lng: 0 },
-      directions: []
+      position: { lat: 0, lng: 0 }
     };
   },
 
@@ -52,7 +52,7 @@ export default {
     }
   },
 
-  props: ["merchants", "destination"],
+  props: ["merchants", "destination", "directions"],
 
   mounted() {
     if (navigator.geolocation) {
@@ -77,22 +77,6 @@ export default {
       if (google === null) {
         return;
       }
-    },
-    directions(i) {
-      const merchant = this.merchants[i];
-      const directionService = new google.maps.DirectionsService();
-      directionService.route(
-        {
-          origin: this.position,
-          destination: merchant.position,
-          travelMode: "WALKING"
-        },
-        (directions, status) => {
-          if (status == "OK") {
-            this.directions = directions;
-          }
-        }
-      );
     }
   }
 };

@@ -1,25 +1,62 @@
 <template lang="pug">
-  ol.merchants
-    li(v-for="(merchant, i) in merchants" :key="i")
-      span {{ merchant.name }}
+  .merchant-list
+    p.desc
+      strong {{ item }} 
+      span near you:
+    ul.merchants
+      li(v-for="(merchant, i) in merchants" :key="i" @click="$emit('select', i)")
+        span.index {{ i+1 }}. 
+        span.name {{ merchant.name }}
+        span.distance {{ merchant.distance.toFixed(1) }} miles
 </template>
 
 <script>
 export default {
-  props: ["merchants"]
+  props: ["merchants", "item"]
 };
 </script>
 
 <style lang="stylus" scoped>
-.merchants {
+.merchant-list {
   position: absolute;
   top: 50%;
   height: 50%;
   width: 100%;
-}
+  padding: 1em 0;
 
-.merchants li {
-  font-size: 1.3em;
-  margin-left: 1.5em;
+  .desc {
+    font-size: 1.3em;
+    padding-left: 1em;
+    margin-bottom: 0.4em;
+  }
+
+  li {
+    cursor: pointer;
+    position: relative;
+    font-size: 1.3em;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0.6em 1em;
+
+    .name {
+      position: absolute;
+      left: 2.5em;
+      display: inline-block;
+      text-align: left;
+      font-weight: bold;
+      height: 2em;
+    }
+
+    .distance {
+      position: absolute;
+      display: inline-block;
+      right: 0;
+      margin-right: 1em;
+      height: 2em;
+    }
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
 }
 </style>

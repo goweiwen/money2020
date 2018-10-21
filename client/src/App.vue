@@ -6,6 +6,7 @@
           span
           span
           span
+        img(src="https://pdca.org/wp-content/uploads/2018/06/Synchrony-Financial-Logo.jpg" style="height:3em;")
     sidebar#sidebar(:class="{ hidden: isSidebarHidden }" @route="isSidebarHidden = true")
     transition-group(name='fade' mode='out-in')
       router-view#main(key='router-view')
