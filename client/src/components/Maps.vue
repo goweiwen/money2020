@@ -3,7 +3,7 @@
       ref="mapRef"
       @click="deselectMerchant"
       :center="position"
-      :zoom="15"
+      :zoom="10.5"
       map-type-id="terrain")
 
       DirectionsRenderer(
@@ -77,6 +77,9 @@ export default {
       if (google === null) {
         return;
       }
+    },
+    deselectMerchant() {
+      this.$emit("select", null);
     }
   }
 };

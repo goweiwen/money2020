@@ -19,14 +19,6 @@ Vue.use(VueGoogleMaps, {
   }
 });
 
-Notification.requestPermission(permission => {
-  if (permission === "granted") {
-    setTimeout(function() {
-      new Notification("Hey Thomas, choo choo");
-    }, 10000);
-  }
-});
-
 new Vue({
   router,
   store,
