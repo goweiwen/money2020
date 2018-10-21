@@ -31,13 +31,13 @@ var yelpMiddleware = function (req, res, next) {
 			var name = biz.name
 			var lat = biz.coordinates.latitude
 			var lon = biz.coordinates.longitude
-			var items = [
-				itemData.slice(count, count + 5)
-			]
+			var items = itemData.slice(count, count + 5)
 			var merchantData = {
 				name: name,
-				lat: lat,
-				lon: lon,
+				position: {
+					lat: lat,
+					lng: lon
+				},
 				items: items
 			}
 			respData.merchants.push(merchantData)
