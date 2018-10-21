@@ -103,16 +103,16 @@ export default {
 }
 
 .maps {
-  top: -70%;
+  top: -60%;
   width: 100%;
-  height: 210%;
+  height: 180%;
 }
 
 .merchant, .merchants {
   position: absolute;
-  top: 70%;
+  top: 60%;
   width: 100%;
-  height: 30%;
+  height: 40%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background: #fff;
   border-radius: 15px 15px 0 0;
