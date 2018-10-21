@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
+var _ = require('lodash')
 
 const jsonfile = require('jsonfile')
 const file = path.join(__dirname, '/merchant_data.json')
@@ -40,6 +41,8 @@ var yelpMiddleware = function (req, res, next) {
 	var lat1 = req.query.lat
 	var lon1 = req.query.lon
 	var term = req.purchaseStats.nextLikelyPurchase
+	var availableSpend = req.purchaseStats.availableSpend
+	var availableSpend = 250
 	term = 'furniture'
 	var respData = {
 		merchants: []
@@ -52,6 +55,10 @@ var yelpMiddleware = function (req, res, next) {
 			var lon2 = biz.coordinates.longitude
 			var distance = getDistanceFromLatLon(lat1, lon1, lat2, lon2)
 			var items = itemData.slice(count, count + 5)
+			_.map(items, (item) => {
+				return item['insufficentCredit'] = item.price > availableSpend 
+			})
+			items = _.sortBy(items, ['price'])
 			var merchantData = {
 				name: name,
 				position: {
@@ -63,6 +70,7 @@ var yelpMiddleware = function (req, res, next) {
 			}
 			respData.merchants.push(merchantData)
 		}
+		respData.merchants = _.sortBy(respData.merchants, ['distance'])
 		res.json(respData)
 	})
 }
