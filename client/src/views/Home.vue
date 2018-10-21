@@ -58,10 +58,6 @@ export default {
           lat: pos.coords.latitude,
           lng: pos.coords.longitude
         };
-
-        this.merchants.map(merchant => {
-          merchant.position = fuzzPosition(this.position, 0.01);
-        });
       });
 
       const res = await fetch(
