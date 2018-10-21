@@ -99,6 +99,7 @@ export default {
 <style lang="stylus" scoped>
 .home {
   position: relative;
+  overflow-y: hidden;
 }
 
 .maps {
