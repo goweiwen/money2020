@@ -56,7 +56,7 @@ var yelpMiddleware = function (req, res, next) {
 			var distance = getDistanceFromLatLon(lat1, lon1, lat2, lon2)
 			var items = itemData.slice(count, count + 5)
 			_.map(items, (item) => {
-				return item['insufficentCredit'] = item.price > availableSpend 
+				return item['insufficientCredit'] = item.price > availableSpend 
 			})
 			items = _.sortBy(items, ['price'])
 			var merchantData = {
