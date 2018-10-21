@@ -16,17 +16,19 @@ var yelpMiddleware = function (req, res, next) {
 	var lat = req.query.lat
 	var lon = req.query.lon
 	var term = req.purchaseStats.nextLikelyPurchase
+	term = 'furniture'
 	yelpAPI.getNearbyBusinesses(term, lat, lon).then(function(bizData) {
-		res.send(bizData)
+		for (var count = 0; count < 3; count++) {
+			var biz = bizData.businesses[count]
+			var name = biz.name
+			var lat = biz.coordinates.latitude
+			var lon = biz.coordinates.longitude
+			var items = [
+
+			]
+		}
 	})
 }
-
-function processYelpBiz(bizData) {
-	for (var count = 0; count < 5; count++) {
-
-	}
-}
-
 
 /* GET home page. */
 router.get('/', purchaseStatsMiddleware, yelpMiddleware);
