@@ -24,7 +24,7 @@ var yelpMiddleware = function (req, res, next) {
 	var lon = req.query.lon
 	var term = req.purchaseStats.nextLikelyPurchase
 	term = 'furniture'
-	var respData = {merchant: []}
+	var respData = {merchants: []}
 	yelpAPI.getNearbyBusinesses(term, lat, lon).then(function(bizData) {
 		for (var count = 0; count < 3; count++) {
 			var biz = bizData.businesses[count]
@@ -40,7 +40,7 @@ var yelpMiddleware = function (req, res, next) {
 				lon: lon,
 				items: items
 			}
-			respData.merchant.push(merchantData)
+			respData.merchants.push(merchantData)
 		}
 		res.json(respData)
 	})
