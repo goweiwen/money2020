@@ -40,7 +40,7 @@ export default {
   components: { Maps, Merchant, MerchantList },
 
   data() {
-    const position = { lat: 36.17005, lng: -115.27944 };
+    const position = { lat: 36.1209856, lng: -115.1623168 };
     return {
       position,
       destination: null,
@@ -51,23 +51,23 @@ export default {
     };
   },
 
-  async mounted() {
+  mounted() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(pos => {
+      navigator.geolocation.getCurrentPosition(async pos => {
         this.position = {
           lat: pos.coords.latitude,
           lng: pos.coords.longitude
         };
-      });
 
-      const res = await fetch(
-        `https://bmkc.herokuapp.com/merchant?lat=${this.position.lat}&lon=${
-          this.position.lng
-        }`,
-        { mode: "cors" }
-      );
-      const data = await res.json();
-      Vue.set(this, "merchants", data.merchants);
+        const res = await fetch(
+          `https://bmkc.herokuapp.com/merchant?lat=${this.position.lat}&lon=${
+            this.position.lng
+          }`,
+          { mode: "cors" }
+        );
+        const data = await res.json();
+        Vue.set(this, "merchants", data.merchants);
+      });
     }
   },
 
