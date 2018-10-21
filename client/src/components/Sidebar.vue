@@ -17,13 +17,15 @@ export default {
       this.$emit("route");
     },
     notify() {
-      Notification.requestPermission(permission => {
-        if (permission === "granted") {
-          setTimeout(function() {
-            new Notification("Hey Thomas, choo choo");
-          }, 10000);
-        }
-      });
+      if ("Notification" in window) {
+        Notification.requestPermission(permission => {
+          if (permission === "granted") {
+            setTimeout(function() {
+              new Notification("Hey Thomas, choo choo");
+            }, 10000);
+          }
+        });
+      }
     }
   }
 };

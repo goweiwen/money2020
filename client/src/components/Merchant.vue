@@ -4,7 +4,7 @@
       b-icon(icon="directions")
       p GO
 
-    h1.name {{ merchant.name }}
+    h2.name {{ merchant.name }} ({{ merchant.distance.toFixed(1) }} mi)
 
     Catalog(:items="merchant.items" @select="selectItem")
 

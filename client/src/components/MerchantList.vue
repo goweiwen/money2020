@@ -25,7 +25,7 @@ export default {
   padding: 1em 0;
 
   .desc {
-    font-size: 1.3em;
+    font-size: 1em;
     padding-left: 1em;
     margin-bottom: 0.4em;
   }
@@ -33,7 +33,7 @@ export default {
   li {
     cursor: pointer;
     position: relative;
-    font-size: 1.3em;
+    font-size: 1em;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     padding: 0.6em 1em;
 
